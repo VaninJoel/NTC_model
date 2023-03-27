@@ -1,0 +1,975 @@
+<CompuCell3D Revision="2" Version="4.3.0">
+   
+   <Metadata>
+      
+      <!-- Basic properties simulation -->
+      <NumberOfProcessors>2</NumberOfProcessors>
+      <DebugOutputFrequency>10</DebugOutputFrequency>
+      <!-- <NonParallelModule Name="Potts"/> -->
+   </Metadata>
+   
+   <Potts>
+      
+      <!-- Basic properties of CPM (GGH) algorithm -->
+      <Dimensions x="210" y="200" z="1"/>
+      <Steps>100000</Steps>
+      <Temperature>10.0</Temperature>
+      <NeighborOrder>1</NeighborOrder>
+   </Potts>
+   
+   <Plugin Name="CellType">
+      
+      <!-- Listing all cell types in the simulation -->
+      <CellType TypeId="0" TypeName="Medium"/>
+      <CellType TypeId="1" TypeName="endoderm"/>
+      <CellType Freeze="" TypeId="2" TypeName="notochord"/>
+      <CellType TypeId="3" TypeName="mesoderm_L"/>
+      <CellType TypeId="4" TypeName="mesoderm_R"/>
+      <CellType TypeId="5" TypeName="mhp_basal"/>
+      <CellType TypeId="6" TypeName="mhp_lateral"/>
+      <CellType TypeId="7" TypeName="mhp_apical"/>
+      <CellType TypeId="8" TypeName="np_basal_L"/>
+      <CellType TypeId="9" TypeName="np_lateral_L"/>
+      <CellType TypeId="10" TypeName="np_apical_L"/>
+      <CellType TypeId="11" TypeName="np_basal_R"/>
+      <CellType TypeId="12" TypeName="np_lateral_R"/>
+      <CellType TypeId="13" TypeName="np_apical_R"/>
+      <CellType TypeId="14" TypeName="ectoderm_L"/>
+      <CellType TypeId="15" TypeName="ectoderm_R"/>
+      <CellType Freeze="" TypeId="16" TypeName="wall"/>
+      <CellType TypeId="17" TypeName="ECM"/>
+      <CellType TypeId="18" TypeName="fluid"/>
+      
+   </Plugin>
+   
+   <Plugin Name="Volume"/>
+   
+   <Plugin Name="Surface"/>
+
+   
+   
+   <Plugin Name="CenterOfMass">
+      
+      <!-- Module tracking center of mass of each cell -->
+   </Plugin>
+   
+   <Plugin Name="NeighborTracker">
+      
+      <!-- Module tracking neighboring cells of each cell -->
+   </Plugin>
+   
+    <Plugin Name="BoundaryPixelTracker">
+   
+   <!-- Module tracking boundary pixels of each cell -->
+    <NeighborOrder>1</NeighborOrder>
+    </Plugin>
+   
+   <Plugin Name="Contact">
+      <!-- Specification of adhesion energies -->
+      <Energy Type1="Medium" Type2="Medium">0.0</Energy>
+      <Energy Type1="Medium" Type2="endoderm">20.0</Energy>
+      <Energy Type1="Medium" Type2="notochord">20.0</Energy>
+      <Energy Type1="Medium" Type2="mesoderm_L">20.0</Energy>
+      <Energy Type1="Medium" Type2="mesoderm_R">20.0</Energy>
+      <Energy Type1="Medium" Type2="mhp_basal">20.0</Energy>
+      <Energy Type1="Medium" Type2="mhp_lateral">10.0</Energy>
+      <Energy Type1="Medium" Type2="mhp_apical">5.0</Energy>
+      <Energy Type1="Medium" Type2="np_basal_L">20.0</Energy>
+      <Energy Type1="Medium" Type2="np_lateral_L">10.0</Energy>
+      <Energy Type1="Medium" Type2="np_apical_L">5.0</Energy>
+      <Energy Type1="Medium" Type2="np_basal_R">20.0</Energy>
+      <Energy Type1="Medium" Type2="np_lateral_R">10.0</Energy>
+      <Energy Type1="Medium" Type2="np_apical_R">5.0</Energy>
+      <Energy Type1="Medium" Type2="ectoderm_L">5.0</Energy>
+      <Energy Type1="Medium" Type2="ectoderm_R">5.0</Energy>
+      
+      <Energy Type1="endoderm" Type2="endoderm">3.0</Energy>
+      <Energy Type1="endoderm" Type2="notochord">5.0</Energy>
+      <Energy Type1="endoderm" Type2="mesoderm_L">30.0</Energy>
+      <Energy Type1="endoderm" Type2="mesoderm_R">15.0</Energy>
+      <Energy Type1="endoderm" Type2="mhp_basal">20.0</Energy>
+      <Energy Type1="endoderm" Type2="mhp_lateral">30.0</Energy>
+      <Energy Type1="endoderm" Type2="mhp_apical">30.0</Energy>
+      <Energy Type1="endoderm" Type2="np_basal_L">20.0</Energy>
+      <Energy Type1="endoderm" Type2="np_lateral_L">30.0</Energy>
+      <Energy Type1="endoderm" Type2="np_apical_L">30.0</Energy>
+      <Energy Type1="endoderm" Type2="np_basal_R">20.0</Energy>
+      <Energy Type1="endoderm" Type2="np_lateral_R">30.0</Energy>
+      <Energy Type1="endoderm" Type2="np_apical_R">30.0</Energy>
+      <Energy Type1="endoderm" Type2="ectoderm_L">20.0</Energy>
+      <Energy Type1="endoderm" Type2="ectoderm_R">20.0</Energy>
+      
+      <Energy Type1="notochord" Type2="notochord">5.0</Energy>
+      <Energy Type1="notochord" Type2="mesoderm_L">25.0</Energy>
+      <Energy Type1="notochord" Type2="mesoderm_R">25.0</Energy>
+      <Energy Type1="notochord" Type2="mhp_basal">5.0</Energy>
+      <Energy Type1="notochord" Type2="mhp_lateral">15.0</Energy>
+      <Energy Type1="notochord" Type2="mhp_apical">20.0</Energy>
+      <Energy Type1="notochord" Type2="np_basal_L">15.0</Energy>
+      <Energy Type1="notochord" Type2="np_lateral_L">20.0</Energy>
+      <Energy Type1="notochord" Type2="np_apical_L">30.0</Energy>
+      <Energy Type1="notochord" Type2="np_basal_R">15.0</Energy>
+      <Energy Type1="notochord" Type2="np_lateral_R">20.0</Energy>
+      <Energy Type1="notochord" Type2="np_apical_R">30.0</Energy>
+      <Energy Type1="notochord" Type2="ectoderm_L">20.0</Energy>
+      <Energy Type1="notochord" Type2="ectoderm_R">20.0</Energy>
+      
+      <Energy Type1="mesoderm_L" Type2="mesoderm_L">3.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="mesoderm_R">10.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="mhp_basal">20.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="mhp_lateral">20.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="mhp_apical">30.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="np_basal_L">15.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="np_lateral_L">20.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="np_apical_L">30.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="np_basal_R">15.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="np_lateral_R">20.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="np_apical_R">30.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="ectoderm_L">20.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="ectoderm_R">20.0</Energy>
+      
+      <Energy Type1="mesoderm_R" Type2="mesoderm_R">3.0</Energy>
+      <Energy Type1="mesoderm_R" Type2="mhp_basal">20.0</Energy>
+      <Energy Type1="mesoderm_R" Type2="mhp_lateral">20.0</Energy>
+      <Energy Type1="mesoderm_R" Type2="mhp_apical">30.0</Energy>
+      <Energy Type1="mesoderm_R" Type2="np_basal_L">10.0</Energy>
+      <Energy Type1="mesoderm_R" Type2="np_lateral_L">20.0</Energy>
+      <Energy Type1="mesoderm_R" Type2="np_apical_L">30.0</Energy>
+      <Energy Type1="mesoderm_R" Type2="np_basal_R">10.0</Energy>
+      <Energy Type1="mesoderm_R" Type2="np_lateral_R">20.0</Energy>
+      <Energy Type1="mesoderm_R" Type2="np_apical_R">30.0</Energy>
+      <Energy Type1="mesoderm_R" Type2="ectoderm_L">20.0</Energy>
+      <Energy Type1="mesoderm_R" Type2="ectoderm_R">20.0</Energy>
+      
+      <Energy Type1="mhp_basal" Type2="mhp_basal">5.0</Energy>
+      <Energy Type1="mhp_basal" Type2="mhp_lateral">5.0</Energy>
+      <Energy Type1="mhp_basal" Type2="mhp_apical">15.0</Energy>
+      <Energy Type1="mhp_basal" Type2="np_basal_L">10.0</Energy>
+      <Energy Type1="mhp_basal" Type2="np_lateral_L">10.0</Energy>
+      <Energy Type1="mhp_basal" Type2="np_apical_L">15.0</Energy>
+      <Energy Type1="mhp_basal" Type2="np_basal_R">10.0</Energy>
+      <Energy Type1="mhp_basal" Type2="np_lateral_R">10.0</Energy>
+      <Energy Type1="mhp_basal" Type2="np_apical_R">15.0</Energy>
+      <Energy Type1="mhp_basal" Type2="ectoderm_L">10.0</Energy>
+      <Energy Type1="mhp_basal" Type2="ectoderm_R">10.0</Energy>
+      
+      <Energy Type1="mhp_lateral" Type2="mhp_lateral">5.0</Energy>
+      <Energy Type1="mhp_lateral" Type2="mhp_apical">5.0</Energy>
+      <Energy Type1="mhp_lateral" Type2="np_basal_L">10.0</Energy>
+      <Energy Type1="mhp_lateral" Type2="np_lateral_L">5.0</Energy>
+      <Energy Type1="mhp_lateral" Type2="np_apical_L">10.0</Energy>
+      <Energy Type1="mhp_lateral" Type2="np_basal_R">10.0</Energy>
+      <Energy Type1="mhp_lateral" Type2="np_lateral_R">5.0</Energy>
+      <Energy Type1="mhp_lateral" Type2="np_apical_R">10.0</Energy>
+      <Energy Type1="mhp_lateral" Type2="ectoderm_L">10.0</Energy>
+      <Energy Type1="mhp_lateral" Type2="ectoderm_R">10.0</Energy>
+      
+      <Energy Type1="mhp_apical" Type2="mhp_apical">5.0</Energy>
+      <Energy Type1="mhp_apical" Type2="np_basal_L">15.0</Energy>
+      <Energy Type1="mhp_apical" Type2="np_lateral_L">10.0</Energy>
+      <Energy Type1="mhp_apical" Type2="np_apical_L">5.0</Energy>
+      <Energy Type1="mhp_apical" Type2="np_basal_R">15.0</Energy>
+      <Energy Type1="mhp_apical" Type2="np_lateral_R">10.0</Energy>
+      <Energy Type1="mhp_apical" Type2="np_apical_R">5.0</Energy>
+      <Energy Type1="mhp_apical" Type2="ectoderm_L">10.0</Energy>
+      <Energy Type1="mhp_apical" Type2="ectoderm_R">10.0</Energy>
+      
+      <Energy Type1="np_basal_L" Type2="np_basal_L">5.0</Energy>
+      <Energy Type1="np_basal_L" Type2="np_lateral_L">5.0</Energy>
+      <Energy Type1="np_basal_L" Type2="np_apical_L">15.0</Energy>
+      <Energy Type1="np_basal_L" Type2="np_basal_R">10.0</Energy>
+      <Energy Type1="np_basal_L" Type2="np_lateral_R">10.0</Energy>
+      <Energy Type1="np_basal_L" Type2="np_apical_R">15.0</Energy>
+      <Energy Type1="np_basal_L" Type2="ectoderm_L">5.0</Energy>
+      <Energy Type1="np_basal_L" Type2="ectoderm_R">5.0</Energy>
+      
+      <Energy Type1="np_lateral_L" Type2="np_lateral_L">3.0</Energy>
+      <Energy Type1="np_lateral_L" Type2="np_apical_L">5.0</Energy>
+      <Energy Type1="np_lateral_L" Type2="np_basal_R">10.0</Energy>
+      <Energy Type1="np_lateral_L" Type2="np_lateral_R">10.0</Energy>
+      <Energy Type1="np_lateral_L" Type2="np_apical_R">10.0</Energy>
+      <Energy Type1="np_lateral_L" Type2="ectoderm_L">8.0</Energy>
+      <Energy Type1="np_lateral_L" Type2="ectoderm_R">8.0</Energy>
+      
+      <Energy Type1="np_apical_L" Type2="np_apical_L">3.0</Energy>
+      <Energy Type1="np_apical_L" Type2="np_basal_R">15.0</Energy>
+      <Energy Type1="np_apical_L" Type2="np_lateral_R">10.0</Energy>
+      <Energy Type1="np_apical_L" Type2="np_apical_R">10.0</Energy>
+      <Energy Type1="np_apical_L" Type2="ectoderm_L">8.0</Energy>
+      <Energy Type1="np_apical_L" Type2="ectoderm_R">8.0</Energy>
+      
+      <Energy Type1="np_basal_R" Type2="np_basal_R">3.0</Energy>
+      <Energy Type1="np_basal_R" Type2="np_lateral_R">5.0</Energy>
+      <Energy Type1="np_basal_R" Type2="np_apical_R">15.0</Energy>
+      <Energy Type1="np_basal_R" Type2="ectoderm_L">5.0</Energy>
+      <Energy Type1="np_basal_R" Type2="ectoderm_R">5.0</Energy>
+      
+      <Energy Type1="np_lateral_R" Type2="np_lateral_R">3.0</Energy>
+      <Energy Type1="np_lateral_R" Type2="np_apical_R">5.0</Energy>
+      <Energy Type1="np_lateral_R" Type2="ectoderm_L">8.0</Energy>
+      <Energy Type1="np_lateral_R" Type2="ectoderm_R">8.0</Energy>
+      
+      <Energy Type1="np_apical_R" Type2="np_apical_R">3.0</Energy>
+      <Energy Type1="np_apical_R" Type2="ectoderm_L">8.0</Energy>
+      <Energy Type1="np_apical_R" Type2="ectoderm_R">8.0</Energy>
+      
+      <Energy Type1="ectoderm_L" Type2="ectoderm_L">5.0</Energy>
+      <Energy Type1="ectoderm_L" Type2="ectoderm_R">3.0</Energy>
+      
+      <Energy Type1="ectoderm_R" Type2="ectoderm_R">5.0</Energy>
+      
+      <Energy Type1="wall" Type2="wall">1.0</Energy>
+      <Energy Type1="wall" Type2="endoderm">0.0</Energy>
+      <Energy Type1="wall" Type2="notochord">10.0</Energy>
+      <Energy Type1="wall" Type2="mesoderm_L">30.0</Energy>
+      <Energy Type1="wall" Type2="mesoderm_R">10.0</Energy>
+      <Energy Type1="wall" Type2="mhp_basal">10.0</Energy>
+      <Energy Type1="wall" Type2="mhp_lateral">10.0</Energy>
+      <Energy Type1="wall" Type2="mhp_apical">10.0</Energy>
+      <Energy Type1="wall" Type2="np_basal_L">10.0</Energy>
+      <Energy Type1="wall" Type2="np_lateral_L">10.0</Energy>
+      <Energy Type1="wall" Type2="np_apical_L">10.0</Energy>
+      <Energy Type1="wall" Type2="np_basal_R">10.0</Energy>
+      <Energy Type1="wall" Type2="np_lateral_R">10.0</Energy>
+      <Energy Type1="wall" Type2="np_apical_R">10.0</Energy>
+      <Energy Type1="wall" Type2="ectoderm_L">5.0</Energy>
+      <Energy Type1="wall" Type2="ectoderm_R">5.0</Energy>
+      <Energy Type1="wall" Type2="ECM">5.0</Energy>
+      <Energy Type1="wall" Type2="Medium">0.0</Energy>
+      
+      <Energy Type1="ECM" Type2="ECM">0.0</Energy>
+      <Energy Type1="ECM" Type2="endoderm">5.0</Energy>
+      <Energy Type1="ECM" Type2="notochord">5.0</Energy>
+      <Energy Type1="ECM" Type2="mesoderm_L">7.0</Energy>
+      <Energy Type1="ECM" Type2="mesoderm_R">0.0</Energy>
+      <Energy Type1="ECM" Type2="mhp_basal">10.0</Energy>
+      <Energy Type1="ECM" Type2="mhp_lateral">20.0</Energy>
+      <Energy Type1="ECM" Type2="mhp_apical">25.0</Energy>
+      <Energy Type1="ECM" Type2="np_basal_L">5.0</Energy>
+      <Energy Type1="ECM" Type2="np_lateral_L">10.0</Energy>
+      <Energy Type1="ECM" Type2="np_apical_L">20.0</Energy>
+      <Energy Type1="ECM" Type2="np_basal_R">5.0</Energy>
+      <Energy Type1="ECM" Type2="np_lateral_R">10.0</Energy>
+      <Energy Type1="ECM" Type2="np_apical_R">20.0</Energy>
+      <Energy Type1="ECM" Type2="ectoderm_L">10.0</Energy>
+      <Energy Type1="ECM" Type2="ectoderm_R">10.0</Energy>
+      <Energy Type1="ECM" Type2="Medium">50.0</Energy>
+      
+      <Energy Type1="fluid" Type2="fluid">10.0</Energy>
+      <Energy Type1="fluid" Type2="wall">10.0</Energy>
+      <Energy Type1="fluid" Type2="endoderm">5.0</Energy>
+      <Energy Type1="fluid" Type2="notochord">10.0</Energy>
+      <Energy Type1="fluid" Type2="mesoderm_L">10.0</Energy>
+      <Energy Type1="fluid" Type2="mesoderm_R">10.0</Energy>
+      <Energy Type1="fluid" Type2="mhp_basal">10.0</Energy>
+      <Energy Type1="fluid" Type2="mhp_lateral">10.0</Energy>
+      <Energy Type1="fluid" Type2="mhp_apical">10.0</Energy>
+      <Energy Type1="fluid" Type2="np_basal_L">10.0</Energy>
+      <Energy Type1="fluid" Type2="np_lateral_L">10.0</Energy>
+      <Energy Type1="fluid" Type2="np_apical_L">10.0</Energy>
+      <Energy Type1="fluid" Type2="np_basal_R">10.0</Energy>
+      <Energy Type1="fluid" Type2="np_lateral_R">10.0</Energy>
+      <Energy Type1="fluid" Type2="np_apical_R">10.0</Energy>
+      <Energy Type1="fluid" Type2="ectoderm_L">10.0</Energy>
+      <Energy Type1="fluid" Type2="ectoderm_R">10.0</Energy>
+      <Energy Type1="fluid" Type2="ECM">10.0</Energy>
+      <Energy Type1="fluid" Type2="Medium">10.0</Energy>
+      
+      
+      <NeighborOrder>4</NeighborOrder>
+   </Plugin>
+   
+   
+   
+   <Plugin Name="ContactInternal">
+      <!-- Specification of internal adhesion energies --> 
+
+
+      <Energy Type1="endoderm" Type2="endoderm">0.0</Energy>
+      <Energy Type1="endoderm" Type2="notochord">0.0</Energy>
+      <Energy Type1="endoderm" Type2="mesoderm_L">0.0</Energy>
+      <Energy Type1="endoderm" Type2="mesoderm_R">0.0</Energy>
+      <Energy Type1="endoderm" Type2="mhp_basal">0.0</Energy>
+      <Energy Type1="endoderm" Type2="mhp_lateral">0.0</Energy>
+      <Energy Type1="endoderm" Type2="mhp_apical">0.0</Energy>
+      <Energy Type1="endoderm" Type2="np_basal_L">0.0</Energy>
+      <Energy Type1="endoderm" Type2="np_lateral_L">0.0</Energy>
+      <Energy Type1="endoderm" Type2="np_apical_L">0.0</Energy>
+      <Energy Type1="endoderm" Type2="np_basal_R">0.0</Energy>
+      <Energy Type1="endoderm" Type2="np_lateral_R">0.0</Energy>
+      <Energy Type1="endoderm" Type2="np_apical_R">0.0</Energy>
+      <Energy Type1="endoderm" Type2="ectoderm_L">0.0</Energy>
+      <Energy Type1="endoderm" Type2="ectoderm_R">0.0</Energy>
+      <Energy Type1="notochord" Type2="notochord">0.0</Energy>
+      <Energy Type1="notochord" Type2="mesoderm_L">0.0</Energy>
+      <Energy Type1="notochord" Type2="mesoderm_R">0.0</Energy>
+      <Energy Type1="notochord" Type2="mhp_basal">0.0</Energy>
+      <Energy Type1="notochord" Type2="mhp_lateral">0.0</Energy>
+      <Energy Type1="notochord" Type2="mhp_apical">0.0</Energy>
+      <Energy Type1="notochord" Type2="np_basal_L">0.0</Energy>
+      <Energy Type1="notochord" Type2="np_lateral_L">0.0</Energy>
+      <Energy Type1="notochord" Type2="np_apical_L">0.0</Energy>
+      <Energy Type1="notochord" Type2="np_basal_R">0.0</Energy>
+      <Energy Type1="notochord" Type2="np_lateral_R">0.0</Energy>
+      <Energy Type1="notochord" Type2="np_apical_R">0.0</Energy>
+      <Energy Type1="notochord" Type2="ectoderm_L">0.0</Energy>
+      <Energy Type1="notochord" Type2="ectoderm_R">0.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="mesoderm_L">0.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="mesoderm_R">0.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="mhp_basal">0.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="mhp_lateral">0.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="mhp_apical">0.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="np_basal_L">0.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="np_lateral_L">0.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="np_apical_L">0.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="np_basal_R">0.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="np_lateral_R">0.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="np_apical_R">0.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="ectoderm_L">0.0</Energy>
+      <Energy Type1="mesoderm_L" Type2="ectoderm_R">0.0</Energy>
+      <Energy Type1="mesoderm_R" Type2="mesoderm_R">0.0</Energy>
+      <Energy Type1="mesoderm_R" Type2="mhp_basal">0.0</Energy>
+      <Energy Type1="mesoderm_R" Type2="mhp_lateral">0.0</Energy>
+      <Energy Type1="mesoderm_R" Type2="mhp_apical">0.0</Energy>
+      <Energy Type1="mesoderm_R" Type2="np_basal_L">0.0</Energy>
+      <Energy Type1="mesoderm_R" Type2="np_lateral_L">0.0</Energy>
+      <Energy Type1="mesoderm_R" Type2="np_apical_L">0.0</Energy>
+      <Energy Type1="mesoderm_R" Type2="np_basal_R">0.0</Energy>
+      <Energy Type1="mesoderm_R" Type2="np_lateral_R">0.0</Energy>
+      <Energy Type1="mesoderm_R" Type2="np_apical_R">0.0</Energy>
+      <Energy Type1="mesoderm_R" Type2="ectoderm_L">0.0</Energy>
+      <Energy Type1="mesoderm_R" Type2="ectoderm_R">0.0</Energy>
+      
+      <Energy Type1="mhp_basal" Type2="mhp_basal">0.0</Energy>
+      <Energy Type1="mhp_basal" Type2="mhp_lateral">4.0</Energy>
+      <Energy Type1="mhp_basal" Type2="mhp_apical">4.0</Energy>
+      <Energy Type1="mhp_basal" Type2="np_basal_L">0.0</Energy>
+      <Energy Type1="mhp_basal" Type2="np_lateral_L">4.0</Energy>
+      <Energy Type1="mhp_basal" Type2="np_apical_L">4.0</Energy>
+      <Energy Type1="mhp_basal" Type2="np_basal_R">0.0</Energy>
+      <Energy Type1="mhp_basal" Type2="np_lateral_R">4.0</Energy>
+      <Energy Type1="mhp_basal" Type2="np_apical_R">4.0</Energy>
+      <Energy Type1="mhp_basal" Type2="ectoderm_L">0.0</Energy>
+      <Energy Type1="mhp_basal" Type2="ectoderm_R">0.0</Energy>
+      
+      <Energy Type1="mhp_lateral" Type2="mhp_lateral">0.0</Energy>
+      <Energy Type1="mhp_lateral" Type2="mhp_apical">4.0</Energy>
+      <Energy Type1="mhp_lateral" Type2="np_basal_L">4.0</Energy>
+      <Energy Type1="mhp_lateral" Type2="np_lateral_L">0.0</Energy>
+      <Energy Type1="mhp_lateral" Type2="np_apical_L">4.0</Energy>
+      <Energy Type1="mhp_lateral" Type2="np_basal_R">4.0</Energy>
+      <Energy Type1="mhp_lateral" Type2="np_lateral_R">0.0</Energy>
+      <Energy Type1="mhp_lateral" Type2="np_apical_R">4.0</Energy>
+      <Energy Type1="mhp_lateral" Type2="ectoderm_L">0.0</Energy>
+      <Energy Type1="mhp_lateral" Type2="ectoderm_R">0.0</Energy>
+      
+      <Energy Type1="mhp_apical" Type2="mhp_apical">0.0</Energy>
+      <Energy Type1="mhp_apical" Type2="np_basal_L">4.0</Energy>
+      <Energy Type1="mhp_apical" Type2="np_lateral_L">4.0</Energy>
+      <Energy Type1="mhp_apical" Type2="np_apical_L">0.0</Energy>
+      <Energy Type1="mhp_apical" Type2="np_basal_R">4.0</Energy>
+      <Energy Type1="mhp_apical" Type2="np_lateral_R">4.0</Energy>
+      <Energy Type1="mhp_apical" Type2="np_apical_R">0.0</Energy>
+      <Energy Type1="mhp_apical" Type2="ectoderm_L">0.0</Energy>
+      <Energy Type1="mhp_apical" Type2="ectoderm_R">0.0</Energy>
+      
+      <Energy Type1="np_basal_L" Type2="np_basal_L">0.0</Energy>
+      <Energy Type1="np_basal_L" Type2="np_lateral_L">4.0</Energy>
+      <Energy Type1="np_basal_L" Type2="np_apical_L">4.0</Energy>
+      <Energy Type1="np_basal_L" Type2="np_basal_R">0.0</Energy>
+      <Energy Type1="np_basal_L" Type2="np_lateral_R">4.0</Energy>
+      <Energy Type1="np_basal_L" Type2="np_apical_R">4.0</Energy>
+      <Energy Type1="np_basal_L" Type2="ectoderm_L">0.0</Energy>
+      <Energy Type1="np_basal_L" Type2="ectoderm_R">0.0</Energy>
+      
+      <Energy Type1="np_lateral_L" Type2="np_lateral_L">0.0</Energy>
+      <Energy Type1="np_lateral_L" Type2="np_apical_L">4.0</Energy>
+      <Energy Type1="np_lateral_L" Type2="np_basal_R">4.0</Energy>
+      <Energy Type1="np_lateral_L" Type2="np_lateral_R">0.0</Energy>
+      <Energy Type1="np_lateral_L" Type2="np_apical_R">4.0</Energy>
+      <Energy Type1="np_lateral_L" Type2="ectoderm_L">0.0</Energy>
+      <Energy Type1="np_lateral_L" Type2="ectoderm_R">0.0</Energy>
+      
+      <Energy Type1="np_apical_L" Type2="np_apical_L">0.0</Energy>
+      <Energy Type1="np_apical_L" Type2="np_basal_R">4.0</Energy>
+      <Energy Type1="np_apical_L" Type2="np_lateral_R">4.0</Energy>
+      <Energy Type1="np_apical_L" Type2="np_apical_R">0.0</Energy>
+      <Energy Type1="np_apical_L" Type2="ectoderm_L">0.0</Energy>
+      <Energy Type1="np_apical_L" Type2="ectoderm_R">0.0</Energy>
+      
+      <Energy Type1="np_basal_R" Type2="np_basal_R">0.0</Energy>
+      <Energy Type1="np_basal_R" Type2="np_lateral_R">4.0</Energy>
+      <Energy Type1="np_basal_R" Type2="np_apical_R">4.0</Energy>
+      <Energy Type1="np_basal_R" Type2="ectoderm_L">0.0</Energy>
+      <Energy Type1="np_basal_R" Type2="ectoderm_R">0.0</Energy>
+      
+      <Energy Type1="np_lateral_R" Type2="np_lateral_R">0.0</Energy>
+      <Energy Type1="np_lateral_R" Type2="np_apical_R">4.0</Energy>
+      <Energy Type1="np_lateral_R" Type2="ectoderm_L">0.0</Energy>
+      <Energy Type1="np_lateral_R" Type2="ectoderm_R">0.0</Energy>
+      
+      <Energy Type1="np_apical_R" Type2="np_apical_R">0.0</Energy>
+      <Energy Type1="np_apical_R" Type2="ectoderm_L">0.0</Energy>
+      <Energy Type1="np_apical_R" Type2="ectoderm_R">0.0</Energy>
+      <Energy Type1="ectoderm_L" Type2="ectoderm_L">0.0</Energy>
+      <Energy Type1="ectoderm_L" Type2="ectoderm_R">0.0</Energy>
+      <Energy Type1="ectoderm_R" Type2="ectoderm_R">0.0</Energy>
+      
+      <Energy Type1="wall" Type2="wall">0.0</Energy>
+      <Energy Type1="wall" Type2="endoderm">0.0</Energy>
+      <Energy Type1="wall" Type2="notochord">0.0</Energy>
+      <Energy Type1="wall" Type2="mesoderm_L">0.0</Energy>
+      <Energy Type1="wall" Type2="mesoderm_R">0.0</Energy>
+      <Energy Type1="wall" Type2="mhp_basal">0.0</Energy>
+      <Energy Type1="wall" Type2="mhp_lateral">0.0</Energy>
+      <Energy Type1="wall" Type2="mhp_apical">0.0</Energy>
+      <Energy Type1="wall" Type2="np_basal_L">0.0</Energy>
+      <Energy Type1="wall" Type2="np_lateral_L">0.0</Energy>
+      <Energy Type1="wall" Type2="np_apical_L">0.0</Energy>
+      <Energy Type1="wall" Type2="np_basal_R">0.0</Energy>
+      <Energy Type1="wall" Type2="np_lateral_R">0.0</Energy>
+      <Energy Type1="wall" Type2="np_apical_R">0.0</Energy>
+      <Energy Type1="wall" Type2="ectoderm_L">0.0</Energy>
+      <Energy Type1="wall" Type2="ectoderm_R">0.0</Energy>
+      <Energy Type1="wall" Type2="ECM">0.0</Energy>
+      <Energy Type1="wall" Type2="Medium">0.0</Energy>
+      
+      <Energy Type1="ECM" Type2="ECM">0.0</Energy>
+      <Energy Type1="ECM" Type2="endoderm">0.0</Energy>
+      <Energy Type1="ECM" Type2="notochord">0.0</Energy>
+      <Energy Type1="ECM" Type2="mesoderm_L">0.0</Energy>
+      <Energy Type1="ECM" Type2="mesoderm_R">0.0</Energy>
+      <Energy Type1="ECM" Type2="mhp_basal">0.0</Energy>
+      <Energy Type1="ECM" Type2="mhp_lateral">0.0</Energy>
+      <Energy Type1="ECM" Type2="mhp_apical">0.0</Energy>
+      <Energy Type1="ECM" Type2="np_basal_L">0.0</Energy>
+      <Energy Type1="ECM" Type2="np_lateral_L">0.0</Energy>
+      <Energy Type1="ECM" Type2="np_apical_L">0.0</Energy>
+      <Energy Type1="ECM" Type2="np_basal_R">0.0</Energy>
+      <Energy Type1="ECM" Type2="np_lateral_R">0.0</Energy>
+      <Energy Type1="ECM" Type2="np_apical_R">0.0</Energy>
+      <Energy Type1="ECM" Type2="ectoderm_L">0.0</Energy>
+      <Energy Type1="ECM" Type2="ectoderm_R">0.0</Energy>
+      <Energy Type1="ECM" Type2="Medium">0.0</Energy>
+      
+      
+      <NeighborOrder>4</NeighborOrder>
+   </Plugin>
+   
+   <Plugin Name="FocalPointPlasticity">
+      
+      <!-- Specification of focal point junctions -->
+      <!-- We separetely specify links between members of same cluster - InternalParameters and members of different clusters Parameters. When not using compartmental  cells comment out InternalParameters specification -->
+      <!-- To modify FPP links individually for each cell pair uncomment line below -->
+      <Local/>
+      <!-- Note that even though you may manipulate lambdaDistance, targetDistance and maxDistance using Python you still need to set activation energy from XML level -->
+      <!-- See CC3D manual for details on FPP plugin  -->
+       
+      <Parameters Type1="mhp_apical" Type2="mhp_apical">
+         <Lambda>20</Lambda>
+         <ActivationEnergy>-50</ActivationEnergy>
+         <TargetDistance>5</TargetDistance>
+         <MaxDistance>20</MaxDistance>
+         <MaxNumberOfJunctions NeighborOrder="1">2</MaxNumberOfJunctions>
+      </Parameters>
+      
+       
+      <Parameters Type1="mhp_apical" Type2="np_apical_R">
+         <Lambda>20</Lambda>
+         <ActivationEnergy>-50</ActivationEnergy>
+         <TargetDistance>6</TargetDistance>
+         <MaxDistance>10</MaxDistance>
+         <MaxNumberOfJunctions NeighborOrder="1">1</MaxNumberOfJunctions>
+      </Parameters>
+      
+     
+      <Parameters Type1="np_apical_R" Type2="np_apical_R">
+         <Lambda>20</Lambda>
+         <ActivationEnergy>-50</ActivationEnergy>
+         <TargetDistance>5</TargetDistance>
+         <MaxDistance>20</MaxDistance>
+         <MaxNumberOfJunctions NeighborOrder="1">2</MaxNumberOfJunctions>
+      </Parameters>
+      
+      <Parameters Type1="mhp_basal" Type2="mhp_basal">
+         <Lambda>20</Lambda>
+         <ActivationEnergy>-50</ActivationEnergy>
+         <TargetDistance>6</TargetDistance>
+         <MaxDistance>20</MaxDistance>
+         <MaxNumberOfJunctions NeighborOrder="1">2</MaxNumberOfJunctions>
+      </Parameters>
+       
+      <Parameters Type1="mhp_basal" Type2="np_basal_R">
+         <Lambda>20</Lambda>
+         <ActivationEnergy>-50</ActivationEnergy>
+         <TargetDistance>5</TargetDistance>
+         <MaxDistance>20</MaxDistance>
+         <MaxNumberOfJunctions NeighborOrder="1">1</MaxNumberOfJunctions>
+      </Parameters>
+      
+     
+      <Parameters Type1="np_basal_R" Type2="np_basal_R">
+         <Lambda>20</Lambda>
+         <ActivationEnergy>-50</ActivationEnergy>
+         <TargetDistance>5</TargetDistance>
+         <MaxDistance>20</MaxDistance>
+         <MaxNumberOfJunctions NeighborOrder="1">2</MaxNumberOfJunctions>
+      </Parameters>
+      
+      <Parameters Type1="endoderm" Type2="endoderm">
+         <Lambda>20</Lambda>
+         <ActivationEnergy>-50</ActivationEnergy>
+         <TargetDistance>10</TargetDistance>
+         <MaxDistance>20</MaxDistance>
+         <MaxNumberOfJunctions NeighborOrder="1">2</MaxNumberOfJunctions>
+      </Parameters>  
+      
+      <NeighborOrder>1</NeighborOrder>
+   </Plugin>
+   
+   <Plugin Name="Secretion">
+      
+      <!-- Specification of secretion properties of select cell types. -->
+      <!-- You may repeat Field element for each chemical field declared in the PDE solvers -->
+      <!-- Specification of secretion properties of individual cells can be done in Python -->
+      <Field Name="BMP4"> </Field>
+     <Field Name="SHH"> </Field>  
+      <!-- <Field Name="TOXIC_FLUID"> </Field> -->
+         <!-- <Secretion Type="ectoderm_L">0</Secretion> -->
+         <!-- <Secretion Type="ectoderm_R">0</Secretion> -->
+        
+   </Plugin>
+   
+   <Steppable Type="DiffusionSolverFE">
+      
+      <!-- <Specification of PDE solvers> -->
+        <!-- <DiffusionField Name="TOXIC_FLUID"> -->
+         <!-- <DiffusionData> -->
+            <!-- <FieldName>TOXIC_FLUID</FieldName> -->
+            <!-- <GlobalDiffusionConstant>0.1</GlobalDiffusionConstant> -->
+            
+            <!-- <GlobalDecayConstant>0.00</GlobalDecayConstant> -->
+            <!-- <DiffusionCoefficient CellType="wall">0</DiffusionCoefficient> -->
+            <!-- <DiffusionCoefficient CellType="ectoderm_L">0</DiffusionCoefficient> -->
+            <!-- <DiffusionCoefficient CellType="ectoderm_R">0</DiffusionCoefficient> -->
+            
+
+         <!-- </DiffusionData> -->
+        <!-- </DiffusionField> -->
+        
+      <DiffusionField Name="BMP4">
+         <DiffusionData>
+            <FieldName>BMP4</FieldName>
+            <GlobalDiffusionConstant>0.2</GlobalDiffusionConstant>
+            
+            <GlobalDecayConstant>0.0008</GlobalDecayConstant>
+            <!-- Additional options are: -->
+            <!-- <InitialConcentrationExpression>x*y</InitialConcentrationExpression> -->
+            <!-- <ConcentrationFileName>INITIAL CONCENTRATION FIELD - typically a file with path Simulation/NAME_OF_THE_FILE.txt</ConcentrationFileName> -->
+            <!-- <DiffusionCoefficient CellType="Cell1">0.1</DiffusionCoefficient> -->
+            <!-- <DiffusionCoefficient CellType="Medium">0.25</DiffusionCoefficient> -->
+            <DiffusionCoefficient CellType="wall">0</DiffusionCoefficient>
+            <!-- <DiffusionCoefficient CellType="ectoderm_L">1</DiffusionCoefficient> -->
+
+            <!-- <DecayCoefficient CellType="Cell2">0.0001</DecayCoefficient> -->
+         </DiffusionData>
+         </DiffusionField>
+         
+       <DiffusionField Name="SHH">
+         <DiffusionData>
+            <FieldName>SHH</FieldName>
+            <GlobalDiffusionConstant>0.2</GlobalDiffusionConstant>
+            
+            <GlobalDecayConstant>0.0008</GlobalDecayConstant>
+            <!-- Additional options are: -->
+            <!-- <InitialConcentrationExpression>x*y</InitialConcentrationExpression> -->
+            <!-- <ConcentrationFileName>INITIAL CONCENTRATION FIELD - typically a file with path Simulation/NAME_OF_THE_FILE.txt</ConcentrationFileName> -->
+            <!-- <DiffusionCoefficient CellType="Cell1">0.1</DiffusionCoefficient> -->
+            <!-- <DiffusionCoefficient CellType="Medium">0.25</DiffusionCoefficient> -->
+            <DiffusionCoefficient CellType="wall">0</DiffusionCoefficient>
+            <!-- <DiffusionCoefficient CellType="ectoderm_L">1</DiffusionCoefficient> -->
+
+            <!-- <DecayCoefficient CellType="Cell2">0.0001</DecayCoefficient> -->
+         </DiffusionData>
+         
+         <BoundaryConditions>
+            <Plane Axis="X">
+               <!-- <ConstantValue PlanePosition="Min" Value="100.0"/> -->
+               <!-- <ConstantValue PlanePosition="Max" Value="0"/> -->
+               <!-- Other options are (examples): -->
+               <Periodic/>
+               <!-- <ConstantDerivative PlanePosition="Min" Value="10.0"/> -->
+            </Plane>
+            <Plane Axis="Y">
+               <!-- <ConstantDerivative PlanePosition="Min" Value="100.0"/> -->
+               <!-- <ConstantDerivative PlanePosition="Max" Value="0"/> -->
+               <!-- Other options are (examples): -->
+               <Periodic/>
+               <!-- <ConstantValue PlanePosition="Min" Value="10.0"/> -->
+            </Plane>
+         </BoundaryConditions>
+      </DiffusionField>
+   </Steppable>
+   
+
+   
+   <!-- <Plugin Name="LengthConstraintLocalFlex"> -->
+      
+      <!-- &lt;!&ndash; Applies elongation constraint to each cell. Users specify the length major axis -TargetLength and a strength of the constraint -LambdaLength. Parameters are specified for each cell individually &ndash;&gt;  -->
+
+
+      <!-- &lt;!&ndash; IMPORTANT: To prevent cell fragmentation for large elongations you need to also use connectivity constraint &ndash;&gt;  -->
+
+
+      <!-- This plugin currently works only in 2D. Use the following Python syntax to set/modify length constraint: -->
+      <!-- self.lengthConstraintFlexPlugin.setLengthConstraintData(cell,20,30)  # cell , lambdaLength, targetLength   -->
+   <!-- </Plugin> -->
+
+   <Plugin Name="OrientedGrowth">
+        <Penalty>150</Penalty>
+        <Falloff>5</Falloff>
+   </Plugin>
+    
+    <Plugin Name="ExternalPotential">
+    </Plugin>
+    
+    <!-- <Steppable Type="PIFInitializer"> -->
+        <!-- <PIFName>Simulation/initial_layout.piff</PIFName> -->
+    <!-- </Steppable> -->
+    
+   <Steppable Type="UniformInitializer">
+        
+        <!-- &lt;!&ndash; fluid &ndash;&gt;  -->  
+        <!-- <Region> -->
+            <!-- <BoxMin x="0" y="50" z="0"/> -->
+            <!-- <BoxMax x="210" y="100" z="1"/> -->
+            <!-- <Gap>0</Gap> -->
+            <!-- <Width>7</Width> -->
+            <!-- <Types>fluid</Types> -->
+        <!-- </Region> -->
+
+       <!-- ENDODERM --> 
+        <Region>
+            <BoxMin x="0" y="36" z="0"/>
+            <BoxMax x="210" y="43" z="1"/>
+            <Gap>0</Gap>
+            <Width>10</Width>
+            <Types>endoderm</Types>
+        </Region>
+      
+
+        
+        
+        <!-- &lt;!&ndash; MESODERM LEFT &ndash;&gt;  --> 
+
+
+        <!-- <Region> -->
+            <!-- <BoxMin x="0" y="50" z="0"/> -->
+            <!-- <BoxMax x="84" y="78" z="1"/> -->
+            <!-- <Gap>0</Gap> -->
+            <!-- <Width>7</Width>  -->
+            <!-- <Types>mesoderm_R</Types> -->
+        <!-- </Region> -->
+        
+        <!-- MESODERM RIGHT --> 
+        <Region>
+            <BoxMin x="0" y="43" z="0"/>
+            <BoxMax x="210" y="64" z="1"/>
+            <Gap>0</Gap>
+            <Width>7</Width>
+            <Types>mesoderm_R</Types>
+        </Region>
+        
+                <!-- ECM -->    
+        <Region>
+            <BoxMin x="84" y="43" z="0"/>
+            <BoxMax x="126" y="57" z="1"/>
+            <Gap>0</Gap>
+            <Width>7</Width>
+            <Types>ECM</Types>
+        </Region>
+        
+        <!-- <Region> -->
+            <!-- <BoxMin x="126" y="50" z="0"/> -->
+            <!-- <BoxMax x="133" y="57" z="1"/> -->
+            <!-- <Gap>0</Gap> -->
+            <!-- <Width>7</Width> -->
+            <!-- <Types>ECM</Types> -->
+        <!-- </Region> -->
+        
+        <!-- NOTOCHORD -->
+        <Region>
+            <BoxMin x="84" y="49" z="0"/>
+            <BoxMax x="126" y="51" z="1"/>
+            <Gap>0</Gap>
+            <Width>1</Width> 
+            <Types>notochord</Types>
+        </Region>
+        
+        <Region>
+            <BoxMin x="102" y="43" z="0"/>
+            <BoxMax x="108" y="57" z="1"/>
+            <Gap>0</Gap>
+            <Width>1</Width> 
+            <Types>notochord</Types>
+        </Region>
+        
+        <Region>
+            <BoxMin x="98" y="44" z="0"/>
+            <BoxMax x="112" y="56" z="1"/>
+            <Gap>0</Gap>
+            <Width>1</Width> 
+            <Types>notochord</Types>
+        </Region>
+        
+        <Region>
+            <BoxMin x="94" y="45" z="0"/>
+            <BoxMax x="116" y="55" z="1"/>
+            <Gap>0</Gap>
+            <Width>1</Width> 
+            <Types>notochord</Types>
+        </Region>
+        
+        <Region>
+            <BoxMin x="90" y="46" z="0"/>
+            <BoxMax x="120" y="54" z="1"/>
+            <Gap>0</Gap>
+            <Width>1</Width> 
+            <Types>notochord</Types>
+        </Region>
+        
+        <Region>
+            <BoxMin x="86" y="47" z="0"/>
+            <BoxMax x="124" y="53" z="1"/>
+            <Gap>0</Gap>
+            <Width>1</Width> 
+            <Types>notochord</Types>
+        </Region>
+        
+        <Region>
+            <BoxMin x="85" y="48" z="0"/>
+            <BoxMax x="125" y="52" z="1"/>
+            <Gap>0</Gap>
+            <Width>1</Width> 
+            <Types>notochord</Types>
+        </Region>
+        
+        <!-- <Region> -->
+            <!-- <BoxMin x="86" y="47" z="0"/> -->
+            <!-- <BoxMax x="123" y="53" z="1"/> -->
+            <!-- <Gap>0</Gap> -->
+            <!-- <Width>1</Width>  -->
+            <!-- <Types>notochord</Types> -->
+        <!-- </Region> -->
+       
+       
+        <!-- <Region> -->
+            <!-- <BoxMin x="84" y="43" z="0"/> -->
+            <!-- <BoxMax x="126" y="57" z="1"/> -->
+            <!-- <Gap>0</Gap> -->
+            <!-- <Width>7</Width>  -->
+            <!-- <Types>notochord</Types> -->
+        <!-- </Region> -->
+        
+
+        
+
+        
+        <!-- NeuralPlate_L -->         
+        <Region>
+            <BoxMin x="56" y="57" z="0"/>
+            <BoxMax x="91" y="64" z="1"/>
+            <Gap>0</Gap>
+            <Width>7</Width>
+            <Types>np_basal_R</Types>
+        </Region>
+        
+        <Region>
+            <BoxMin x="56" y="64" z="0"/>
+            <BoxMax x="91" y="71" z="1"/>
+            <Gap>0</Gap>
+            <Width>7</Width>
+            <Types>np_lateral_R</Types>
+        </Region>
+        
+        <Region>
+            <BoxMin x="56" y="71" z="0"/>
+            <BoxMax x="91" y="78" z="1"/>
+            <Gap>0</Gap>
+            <Width>7</Width>
+            <Types>np_apical_R</Types>
+        </Region>
+        
+        <Region>
+            <BoxMin x="21" y="64" z="0"/>
+            <BoxMax x="56" y="71" z="1"/>
+            <Gap>0</Gap>
+            <Width>7</Width>
+            <Types>np_basal_R</Types>
+        </Region>
+        
+        <Region>
+            <BoxMin x="21" y="71" z="0"/>
+            <BoxMax x="56" y="78" z="1"/>
+            <Gap>0</Gap>
+            <Width>7</Width>
+            <Types>np_lateral_R</Types>
+        </Region>
+        
+        <Region>
+            <BoxMin x="21" y="78" z="0"/>
+            <BoxMax x="56" y="85" z="1"/>
+            <Gap>0</Gap>
+            <Width>7</Width>
+            <Types>np_apical_R</Types>
+        </Region>
+        
+        
+        <!-- <Region> -->
+            <!-- <BoxMin x="21" y="71" z="0"/> -->
+            <!-- <BoxMax x="42" y="78" z="1"/> -->
+            <!-- <Gap>0</Gap> -->
+            <!-- <Width>7</Width> -->
+            <!-- <Types>np_basal_R</Types> -->
+        <!-- </Region> -->
+        
+        <!-- <Region> -->
+            <!-- <BoxMin x="21" y="78" z="0"/> -->
+            <!-- <BoxMax x="42" y="85" z="1"/> -->
+            <!-- <Gap>0</Gap> -->
+            <!-- <Width>7</Width> -->
+            <!-- <Types>np_lateral_R</Types> -->
+        <!-- </Region> -->
+        
+        <!-- <Region> -->
+            <!-- <BoxMin x="21" y="85" z="0"/> -->
+            <!-- <BoxMax x="42" y="92" z="1"/> -->
+            <!-- <Gap>0</Gap> -->
+            <!-- <Width>7</Width> -->
+            <!-- <Types>np_apical_R</Types> -->
+        <!-- </Region> -->
+        
+        <!-- NeuralPlate_R --> 
+        
+        <Region>
+            <BoxMin x="119" y="57" z="0"/>
+            <BoxMax x="154" y="64" z="1"/>
+            <Gap>0</Gap>
+            <Width>7</Width>
+            <Types>np_basal_R</Types>
+        </Region>
+        
+        <Region>
+            <BoxMin x="119" y="64" z="0"/>
+            <BoxMax x="154" y="71" z="1"/>
+            <Gap>0</Gap>
+            <Width>7</Width>
+            <Types>np_lateral_R</Types>
+        </Region>
+        
+        <Region>
+            <BoxMin x="119" y="71" z="0"/>
+            <BoxMax x="154" y="78" z="1"/>
+            <Gap>0</Gap>
+            <Width>7</Width>
+            <Types>np_apical_R</Types>
+        </Region>
+        
+        
+        <Region>
+            <BoxMin x="154" y="64" z="0"/>
+            <BoxMax x="189" y="71" z="1"/>
+            <Gap>0</Gap>
+            <Width>7</Width>
+            <Types>np_basal_R</Types>
+        </Region>
+        
+        <Region>
+            <BoxMin x="154" y="71" z="0"/>
+            <BoxMax x="189" y="78" z="1"/>
+            <Gap>0</Gap>
+            <Width>7</Width>
+            <Types>np_lateral_R</Types>
+        </Region>
+        
+        <Region>
+            <BoxMin x="154" y="78" z="0"/>
+            <BoxMax x="189" y="85" z="1"/>
+            <Gap>0</Gap>
+            <Width>7</Width>
+            <Types>np_apical_R</Types>
+        </Region>
+        
+        
+        <!-- <Region> -->
+            <!-- <BoxMin x="168" y="71" z="0"/> -->
+            <!-- <BoxMax x="188" y="78" z="1"/> -->
+            <!-- <Gap>0</Gap> -->
+            <!-- <Width>7</Width> -->
+            <!-- <Types>np_basal_R</Types> -->
+        <!-- </Region> -->
+        
+        <!-- <Region> -->
+            <!-- <BoxMin x="168" y="78" z="0"/> -->
+            <!-- <BoxMax x="188" y="85" z="1"/> -->
+            <!-- <Gap>0</Gap> -->
+            <!-- <Width>7</Width> -->
+            <!-- <Types>np_lateral_R</Types> -->
+        <!-- </Region> -->
+        
+        <!-- <Region> -->
+            <!-- <BoxMin x="168" y="85" z="0"/> -->
+            <!-- <BoxMax x="188" y="92" z="1"/> -->
+            <!-- <Gap>0</Gap> -->
+            <!-- <Width>7</Width> -->
+            <!-- <Types>np_apical_R</Types> -->
+        <!-- </Region> -->
+        
+        <!-- MHP --> 
+        <Region>
+            <BoxMin x="91" y="57" z="0"/>
+            <BoxMax x="119" y="64" z="1"/>
+            <Gap>0</Gap>
+            <Width>7</Width>
+            <Types>mhp_basal</Types>
+        </Region>
+        
+        <Region>
+            <BoxMin x="91" y="64" z="0"/>
+            <BoxMax x="119" y="71" z="1"/>
+            <Gap>0</Gap>
+            <Width>7</Width>
+            <Types>mhp_lateral</Types>
+        </Region>
+        
+        <Region>
+            <BoxMin x="91" y="71" z="0"/>
+            <BoxMax x="119" y="78" z="1"/>
+            <Gap>0</Gap>
+            <Width>7</Width>
+            <Types>mhp_apical</Types>
+        </Region>
+        
+        
+        <!-- ECTODERM --> 
+
+
+        <Region>
+            <BoxMin x="0" y="64" z="0"/>
+            <BoxMax x="21" y="85" z="1"/>
+            <Gap>0</Gap>
+            <Width>7</Width>
+            <Types>ectoderm_L</Types>
+        </Region>
+
+      
+        <Region>
+            <BoxMin x="189" y="64" z="0"/>
+            <BoxMax x="210" y="85" z="1"/>
+            <Gap>0</Gap>
+            <Width>7</Width>
+            <Types>ectoderm_R</Types>
+        </Region>
+
+   </Steppable>
+</CompuCell3D>

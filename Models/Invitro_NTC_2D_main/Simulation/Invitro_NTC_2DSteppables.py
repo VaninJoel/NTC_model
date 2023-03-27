@@ -1,3 +1,22 @@
+# bATCH
+import sys
+
+# Import project libraries and classes
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))))
+
+# Import project libraries and classes
+sys.path.append(os.path.dirname(__file__))
+from BatchRun import BatchRunLib
+
+# Import toolkit
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
+from BatchInputs import *
+
+
+
+##########################################################
+
 from cc3d.core.PySteppables import *
 import math
 import random
@@ -59,7 +78,10 @@ distance_data = []
 
 class CreateCellClusters(SteppableBasePy):
     def __init__(self,frequency=1):
-        SteppableBasePy.__init__(self,frequency)
+
+        SteppableBasePy.__init__(self, frequency)
+        import BatchInputs
+        BatchRunLib.apply_external_multipliers(__name__, BatchInputs)
 
     def start(self):
         self.build_wall(self.WALL)

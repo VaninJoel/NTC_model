@@ -11,25 +11,26 @@ num_rep = 4
 # Model output frequency
 model_out_freq = 1
 # Output frequency of simulation data per simulation replica
-out_freq = 250
+out_freq = 1000
 # Root output directory
 sweep_output_folder = r'/output/'
 if not os.path.isdir(sweep_output_folder):
     Path(sweep_output_folder).mkdir(parents=True)
 
 # Input modules
-from Models.Motion.Simulation import UniCellModelInputs
-input_modules = [UniCellModelInputs]
+from Models.Motion.Simulation import BatchInputs
+input_modules = [BatchInputs]
 # Automatic inputs
 from BatchRun import BatchRunLib
-BatchRunLib.register_auto_inputs(input_module_name='Models.Motion.UniCellModelInputs')
+BatchRunLib.register_auto_inputs(input_module_name='Models.Motion.BatchInputs')
 
+#######################################################################################
 # Carbonate configuration
 from BatchRun.BatchRunPrototyping import config_template
 
 config_template = config_template()
 config_template['jn'] = 'br_principal'
-config_template['wh'] = 18
+config_template['wh'] = 2
 config_template['wm'] = 0
 config_template['ppn'] = 8
 config_template['vmem'] = 10

@@ -180,6 +180,14 @@ class CreateCellClusters(SteppableBasePy):
                         link = self.new_fpp_internal_link(cell, cell2, 40, 12, 40)
                         
                         
+            for cell in self.cell_list_by_type(self.NP_APICAL_R):
+                for neighbor, common_surface_area in self.get_cell_neighbor_data_list(cell):
+                    if neighbor:
+                        if neighbor.type in [NE_APICAL_RIGHT]:
+                        
+                            apical_link = self.new_fpp_link(cell, neighbor, 20, 5, 20)
+                        #apical_link = self.get_fpp_link_by_cells(apical_parent, neighbor)
+                            apical_link.setMaxNumberOfJunctions(1)                        
             
 
 class NeuraltubeModelCellBehaviors(SteppableBasePy):
@@ -193,7 +201,7 @@ class NeuraltubeModelCellBehaviors(SteppableBasePy):
         #self.track_cell_level_scalar_attribute(field_name='lambda_volume', attribute_name='lvolume')
         #self.track_cell_level_scalar_attribute(field_name='lambda_surface', attribute_name='lsurface')
         #self.track_cell_level_scalar_attribute(field_name='x_force_push', attribute_name="X_PUSH_DIRECTION")
-        self.track_cell_level_scalar_attribute(field_name='cell_pressure', attribute_name='pressure')
+        #self.track_cell_level_scalar_attribute(field_name='cell_pressure', attribute_name='pressure')
         #self.track_cell_level_scalar_attribute(field_name='cell_cycle', attribute_name="CELL_CYCLE")
         
         ## general cell parameters ##
@@ -206,11 +214,11 @@ class NeuraltubeModelCellBehaviors(SteppableBasePy):
         self.time_to_stop_mesodermal_growth = 4000 #12000 #mcs default value that stops cell growth
         self.time_to_stop_ectodermal_growth = 4000
         self.cell_cycle_time = 4000
-        self.mesoderm_growth_rate = 0.01 #was 0.015 #was 0.0030
-        self.mesoderm_max_growth_rate = 1.0
+       # self.mesoderm_growth_rate = 0.01 #was 0.015 #was 0.0030
+        #self.mesoderm_max_growth_rate = 1.0
         self.ectoderm_growth_rate = 0.0010
         self.somite_growth_rate = 0.0
-        self.ECM_growth_rate = 0.01
+        #self.ECM_growth_rate = 0.01
         
         self.mesodermal_differentiation_probability = 5/1000
         #self.apoptosis_chance = 0.001
@@ -227,13 +235,13 @@ class NeuraltubeModelCellBehaviors(SteppableBasePy):
         }
         
         ## BMP4 ##
-        self.BMP4_secretion_constant = 0.020
+        #self.BMP4_secretion_constant = 0.020
         self.AC50_BMP4 = 50
         self.BMP4_gradient_low = 0.1
         self.BMP4_gradient_high = 0.8
         
         ## SHH ##
-        self.SHH_secretion_constant = 0.010
+        #self.SHH_secretion_constant = 0.010
         self.SHH_gradient_low = 0.1
         self.SHH_gradient_high = 0.6
         
@@ -243,10 +251,10 @@ class NeuraltubeModelCellBehaviors(SteppableBasePy):
         ##Apical constriction parameters##
         self.enable_apical_constriction_behavior = True
         self.enable_mhp_formation = True
-        self.ne_apical_target_volume = p.ne_apical_target_volume#21 # The target volume of apical cell under apical constriction
-        self.ne_basal_target_volume = 77 # The target volume of basal cell under apical constriction
-        self.mhp_apical_target_volume = 21
-        self.mhp_basal_target_volume = 77
+        #self.ne_apical_target_volume = p.ne_apical_target_volume#21 # The target volume of apical cell under apical constriction
+        #self.ne_basal_target_volume = 77 # The target volume of basal cell under apical constriction
+        #self.mhp_apical_target_volume = 21
+        #self.mhp_basal_target_volume = 77
         
         self.mhp_constrict_frequency = 1
         self.apical_constrict_frequency = 1 # The number of MCS for one step in apical constriction
@@ -706,20 +714,20 @@ class NeuraltubeModelCellBehaviors(SteppableBasePy):
             if self.use_ECM:
                 self.add_mesoderm_matrix_cell(cell)    
             
-        with open("output.txt", "w+") as f:
-            for cell in self.cell_list:
-                    f.write("CLUSTER CELL ID=" + str(cell.clusterId) + "\t" + " type=" + type_list[cell.type] + "\n")
+        # with open("output.txt", "w+") as f:
+        #     for cell in self.cell_list:
+        #             f.write("CLUSTER CELL ID=" + str(cell.clusterId) + "\t" + " type=" + type_list[cell.type] + "\n")
         
-        self.plot_win_distance = self.add_new_plot_window(
-            title='Distance',
-            x_axis_title='MonteCarlo Step (MCS)',
-            y_axis_title='Distance',
-            x_scale_type='linear',
-            y_scale_type='linear',
-            grid=True # only in 3.7.6 or higher
-        )
+        # self.plot_win_distance = self.add_new_plot_window(
+        #     title='Distance',
+        #     x_axis_title='MonteCarlo Step (MCS)',
+        #     y_axis_title='Distance',
+        #     x_scale_type='linear',
+        #     y_scale_type='linear',
+        #     grid=True # only in 3.7.6 or higher
+        # )
         
-        self.plot_win_distance.add_plot("Distance", style='Lines', color='red', size=5)
+        # self.plot_win_distance.add_plot("Distance", style='Lines', color='red', size=5)
 
         
         
@@ -731,7 +739,7 @@ class NeuraltubeModelCellBehaviors(SteppableBasePy):
     def step(self, mcs):
         
         distance = self.calculate_outermost_cell_distance()
-        self.plot_win_distance.add_data_point("Distance", mcs, distance)
+        # self.plot_win_distance.add_data_point("Distance", mcs, distance)
         ## Get all fields ###############################
         BMP4_field = self.field.BMP4
         SHH_field = self.field.SHH
@@ -786,14 +794,14 @@ class NeuraltubeModelCellBehaviors(SteppableBasePy):
             
             #BMP4_concentration_at_cell = BMP4_field[int(cell.xCOM), int(cell.yCOM), int(cell.zCOM)]
             if cell.type in [ECTODERM_LEFT, ECTODERM_RIGHT]:
-                BMP4_secretor.secreteInsideCell(cell, self.BMP4_secretion_constant * self.gene_status_dict["BMP4"])
+                BMP4_secretor.secreteInsideCell(cell, p.BMP4_secretion_constant * self.gene_status_dict["BMP4"])
             
             if cell.type in [NOTOCHORD]:
-                SHH_secretor.secreteInsideCell(cell, self.SHH_secretion_constant * self.gene_status_dict["SHH"])
+                SHH_secretor.secreteInsideCell(cell, p.SHH_secretion_constant * self.gene_status_dict["SHH"])
                 
             if mcs > 3000:
                 if cell.type in [MHP_BASAL, MHP_APICAL, MHP_LATERAL]:
-                    SHH_secretor.secreteInsideCell(cell, self.SHH_secretion_constant * self.gene_status_dict["SHH"])
+                    SHH_secretor.secreteInsideCell(cell, p.SHH_secretion_constant * self.gene_status_dict["SHH"])
                 
             
             # if self.dose_toxic_substance:
@@ -820,15 +828,15 @@ class NeuraltubeModelCellBehaviors(SteppableBasePy):
             ## Start cell growth loop ##
             if mcs <= self.time_to_stop_mesodermal_growth:
                 if cell.type in [MESODERM_RIGHT]:
-                    growth_rate = self.mesoderm_growth_rate
-                    mesoderm_max_growth_rate = self.mesoderm_max_growth_rate
+                    growth_rate = p.mesoderm_growth_rate
+                    mesoderm_max_growth_rate = p.mesoderm_max_growth_rate
                     BMP4_concentration_at_cell = BMP4_field[int(cell.xCOM), int(cell.yCOM), int(cell.zCOM)]
                     growth_rate += (self.hill_function(BMP4_concentration_at_cell, mesoderm_max_growth_rate, self.AC50_BMP4))
                     if cell.targetVolume < 80:
                         cell.targetVolume += growth_rate
                 
                 if cell.type in [ECM]:
-                    cell.targetVolume += self.ECM_growth_rate
+                    cell.targetVolume += p.ECM_growth_rate
                 
                 if cell.type in [MESODERM_LEFT]:
                     cell.targetVolume += self.somite_growth_rate
@@ -848,8 +856,8 @@ class NeuraltubeModelCellBehaviors(SteppableBasePy):
             if self.enable_mhp_formation:
                 self.mhp_apical_constriction(# call MHP apical constriction function
                 cell,
-                self.mhp_apical_target_volume, 
-                self.mhp_basal_target_volume,
+                p.apical_constrict_target_volume, 
+                p.basal_constrict_target_volume,
                 self.delta_target_volume,
                 self.delta_lambda_volume, 
                 self.mhp_constrict_frequency
@@ -875,8 +883,8 @@ class NeuraltubeModelCellBehaviors(SteppableBasePy):
                     
                     self.neuralectoderm_apical_constriction(# call NE apical constriction function
                     cell, 
-                    self.ne_apical_target_volume, 
-                    self.ne_basal_target_volume,
+                    p.apical_constrict_target_volume, 
+                    p.basal_constrict_target_volume,
                     self.delta_target_volume,
                     self.delta_lambda_volume,
                     self.apical_constrict_frequency

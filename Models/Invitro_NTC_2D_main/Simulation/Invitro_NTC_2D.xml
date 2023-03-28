@@ -483,13 +483,7 @@
       </Parameters>
       
      
-      <Parameters Type1="np_apical_R" Type2="np_apical_R">
-         <Lambda>20</Lambda>
-         <ActivationEnergy>-50</ActivationEnergy>
-         <TargetDistance>5</TargetDistance>
-         <MaxDistance>20</MaxDistance>
-         <MaxNumberOfJunctions NeighborOrder="1">2</MaxNumberOfJunctions>
-      </Parameters>
+
       
       <Parameters Type1="mhp_basal" Type2="mhp_basal">
          <Lambda>20</Lambda>

@@ -44,6 +44,8 @@ ne_apical_target_volume = 21 # The target volume of apical cell under apical con
 ne_basal_target_volume = 77 # The target volume of basal cell under apical constriction
 mhp_apical_target_volume = 21
 mhp_basal_target_volume = 77
+apical_constrict_target_volume = 21
+basal_constrict_target_volume = 77
         
 mhp_constrict_frequency = 1 #per how many mcs a apical constriction step is performed
 apical_constrict_frequency = 1 # The number of MCS for one step in apical constriction
@@ -67,3 +69,12 @@ delta_distance = 0.005 #delta change of the FPP link distance
        
 ## Cell layout parameters
 use_ECM = True #initialize extra ECM around the mesodermal cells
+
+
+##### for the cluster computer #####
+
+BMP4_secretion_constant = 0.020
+SHH_secretion_constant = 0.010
+mesoderm_growth_rate = 0.010
+
+#####

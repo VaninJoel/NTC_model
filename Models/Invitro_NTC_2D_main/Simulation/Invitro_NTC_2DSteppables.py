@@ -77,8 +77,8 @@ class CreateCellClusters(SteppableBasePy):
     def __init__(self, frequency=1):
 
         SteppableBasePy.__init__(self, frequency)
-        import BatchInputs
-        BatchRunLib.apply_external_multipliers(__name__, BatchInputs)
+        import parameters
+        BatchRunLib.apply_external_multipliers(__name__, parameters)
 
     def start(self):
         self.build_wall(self.WALL)

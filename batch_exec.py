@@ -1,9 +1,9 @@
 from pathlib import Path
 import os
 # Model inputs
-var_dict = {"BMP4_secretion_constant": [0.0025, 0.005, 0.020, 0.08, 0.16],  # 5
-             "SHH_secretion_constant": [0.00125, 0.0025, 0.010, 0.04, 0.08],  # 5
-             "mesoderm_growth_rate": [0.00125, 0.0025, 0.010, 0.04, 0.08]}  # 5
+var_dict = {"BMP4_secretion_constant": [1/8, 1/4, 1, 4, 8],  # 5
+             "SHH_secretion_constant": [1/8, 1/4, 1, 4, 8],  # 5
+             "mesoderm_growth_rate": [1/8, 1/4, 1, 4, 8]}  # 5
 
 mult_dict = var_dict
 # number of replicates

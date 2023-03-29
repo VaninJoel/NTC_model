@@ -7,7 +7,7 @@ var_dict = {"BMP4_secretion_constant": [0.0025, 0.005, 0.020, 0.08, 0.16],  # 5
 
 mult_dict = var_dict
 # number of replicates
-num_rep = 4
+num_rep = 3
 # Model output frequency
 model_out_freq = 1
 # Output frequency of simulation data per simulation replica

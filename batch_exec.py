@@ -13,7 +13,7 @@ model_out_freq = 1
 # Output frequency of simulation data per simulation replica
 out_freq = 1000
 # Root output directory
-sweep_output_folder = r'/output/'
+sweep_output_folder = r'/N/slate/jferrari/NTC/'
 if not os.path.isdir(sweep_output_folder):
     Path(sweep_output_folder).mkdir(parents=True)
 

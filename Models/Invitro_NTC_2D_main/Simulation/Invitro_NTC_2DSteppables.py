@@ -1,5 +1,7 @@
 # bATCH
 import sys
+import numpy as np
+from os.path import join
 
 # Import project libraries and classes
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))))
@@ -135,6 +137,8 @@ class CreateCellClusters(SteppableBasePy):
                     # self.remove_all_cell_fpp_links(cell)
 
     def step(self, mcs):
+        if not mcs % 1000:
+            self.save_sim_as_numpy(mcs=mcs)
         if mcs == 10:
 
             # for cell in self.cell_list_by_type(self.MHP_APICAL):            
@@ -175,6 +179,48 @@ class CreateCellClusters(SteppableBasePy):
                             apical_link = self.new_fpp_link(cell, neighbor, 20, 5, 20)
                             # apical_link = self.get_fpp_link_by_cells(apical_parent, neighbor)
                             apical_link.setMaxNumberOfJunctions(1)
+
+    def save_sim_as_numpy(self, mcs=12000):
+
+        mega_image_cheat_sheet = "Channel list: \n " \
+                                 "- Channel 0 = cell id \n" \
+                                 "- Channel 1 = cluster id \n" \
+                                 "- Channel 2 = type \n" \
+                                 "- Channel 3 = BMP4 \n" \
+                                 "- Channel 4 = SHH \n" \
+                                 "- Channel 5 = COM x \n" \
+                                 "- Channel 6 = COM y \n" \
+                                 "- Channel 7 = pressure"
+
+        number_channels = len(mega_image_cheat_sheet.split("\n")) - 1
+
+        mega_image = np.zeros([self.dim.x, self.dim.y, number_channels], dtype=float)
+        BMP4 = self.field.BMP4
+        SHH = self.field.SHH
+
+        for x, y, z in self.every_pixel():
+            cell = self.cell_field[x, y, z]
+            mega_image[x, y, 0] = cell.id
+            mega_image[x, y, 1] = cell.clusterId
+            mega_image[x, y, 2] = cell.type
+            mega_image[x, y, 3] = BMP4[x, y, 0]
+            mega_image[x, y, 4] = SHH[x, y, 0]
+            mega_image[x, y, 5] = cell.xCOM
+            mega_image[x, y, 6] = cell.yCOM
+            mega_image[x, y, 7] = cell.pressure
+
+        with open(join(self.output_dir, "image_cheat_sheet.txt"), "w+") as fout:
+            fout.write(mega_image_cheat_sheet+"\n")
+
+        np.save(join(self.output_dir, f"sim_field_{mcs}.npy"), mega_image)
+
+    def finish(self):
+        self.save_sim_as_numpy()
+        return
+
+    def on_stop(self):
+        self.finish()
+        return
 
 
 class NeuraltubeModelCellBehaviors(SteppableBasePy):

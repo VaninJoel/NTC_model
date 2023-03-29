@@ -18,18 +18,18 @@ if not os.path.isdir(sweep_output_folder):
     Path(sweep_output_folder).mkdir(parents=True)
 
 # Input modules
-from Models.Motion.Simulation import BatchInputs
-input_modules = [BatchInputs]
+from Models.Invitro_NTC_2D_main.Simulation import parameters
+input_modules = [parameters]
 # Automatic inputs
 from BatchRun import BatchRunLib
-BatchRunLib.register_auto_inputs(input_module_name='Models.Motion.BatchInputs')
+BatchRunLib.register_auto_inputs(input_module_name='Models.Invitro_NTC_2D_main.parameters')
 
 #######################################################################################
 # Carbonate configuration
 from BatchRun.BatchRunPrototyping import config_template
 
 config_template = config_template()
-config_template['jn'] = 'br_principal'
+config_template['jn'] = 'tube_closing'
 config_template['wh'] = 2
 config_template['wm'] = 0
 config_template['ppn'] = 8
@@ -40,8 +40,8 @@ import os
 from nCoVToolkit import nCoVUtils
 from BatchRun import BatchRunPrototyping
 
-BatchRunPrototyping.simulation_fname = os.path.join(os.path.dirname(__file__),
-                                                    'UniCell_Explicit_Force_2D_with_beta.cc3d')
+BatchRunPrototyping.simulation_fname = os.path.join(os.path.dirname(__file__), "Models", "Invitro_NTC_2D_main",
+                                                    'Invitro_NTC_2D.cc3d')
 
 from BatchRun.BatchRunLib import cc3d_batch_key
 

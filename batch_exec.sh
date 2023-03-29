@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Set PREFIX_CC3D to the root directory of your CC3D installation!
-export PREFIX_CC3D=/.../<conda>/<CC3D_env>/bin
+export PREFIX_CC3D=/N/u/jferrari/Carbonate/.conda/envs/cc3d_spr23/bin
 
 # If Python is not installed in the CC3D root directory, then replace this with the path to the Python root directory
 # export PYTHON_INSTALL_PATH=${PREFIX_CC3D}/Python37/bin
-export PYTHON_INSTALL_PATH=/.../<conda>/<CC3D_env>/bin
+export PYTHON_INSTALL_PATH=/N/u/jferrari/Carbonate/.conda/envs/cc3d_spr23/bin
 
 # Environment setup
 

@@ -278,8 +278,8 @@ def interactive_run_script() -> str:
     return o
 
 def out_file(filename):
-    s = f"# SBATCH -o {filename}_%j.txt\n"
-    s += f"# SBATCH -e {filename}_%j.err\n"
+    s = f"#SBATCH -o {filename}_%j.txt\n"
+    s += f"#SBATCH -e {filename}_%j.err\n"
     return s
 
 

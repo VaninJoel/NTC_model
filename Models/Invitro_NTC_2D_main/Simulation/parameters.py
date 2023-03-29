@@ -1,4 +1,7 @@
-## general cell parameters        
+
+__param_desc__ = {}
+
+## general cell parameters
 standard_target_volume = 49  # initial volume of the cells based on the 7x7 cell layout
 standard_lambda_volume = 2.0  # lambda volume
 time_to_stop_mesodermal_growth = 4000  # after x mcs
@@ -71,8 +74,11 @@ use_ECM = True  # initialize extra ECM around the mesodermal cells
 
 ##### for the cluster computer #####
 
+__param_desc__["BMP4_secretion_constant"] = ""
 BMP4_secretion_constant = 0.020
+__param_desc__["SHH_secretion_constant"] = ""
 SHH_secretion_constant = 0.010
+__param_desc__["mesoderm_growth_rate"] = ""
 mesoderm_growth_rate = 0.010
 
 #####

@@ -32,7 +32,7 @@ config_template = config_template()
 config_template['jn'] = 'tube_closing'
 config_template['wh'] = 2
 config_template['wm'] = 0
-config_template['ppn'] = 8
+config_template['ppn'] = 1
 config_template['vmem'] = 10
 
 # Begin computing work

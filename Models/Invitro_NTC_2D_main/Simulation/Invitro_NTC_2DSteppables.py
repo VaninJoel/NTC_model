@@ -2,7 +2,7 @@
 import sys
 import numpy as np
 from os.path import join
-
+import os
 # Import project libraries and classes
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))))
 
@@ -200,14 +200,23 @@ class CreateCellClusters(SteppableBasePy):
 
         for x, y, z in self.every_pixel():
             cell = self.cell_field[x, y, z]
-            mega_image[x, y, 0] = cell.id
-            mega_image[x, y, 1] = cell.clusterId
-            mega_image[x, y, 2] = cell.type
+            if cell:
+                mega_image[x, y, 0] = cell.id
+                mega_image[x, y, 1] = cell.clusterId
+                mega_image[x, y, 2] = cell.type
+                mega_image[x, y, 5] = cell.xCOM
+                mega_image[x, y, 6] = cell.yCOM
+                mega_image[x, y, 7] = cell.pressure
+            else:
+                mega_image[x, y, 0] = np.nan
+                mega_image[x, y, 1] = np.nan
+                mega_image[x, y, 2] = np.nan
+                mega_image[x, y, 5] = np.nan
+                mega_image[x, y, 6] = np.nan
+                mega_image[x, y, 7] = np.nan
             mega_image[x, y, 3] = BMP4[x, y, 0]
             mega_image[x, y, 4] = SHH[x, y, 0]
-            mega_image[x, y, 5] = cell.xCOM
-            mega_image[x, y, 6] = cell.yCOM
-            mega_image[x, y, 7] = cell.pressure
+
 
         with open(join(self.output_dir, "image_cheat_sheet.txt"), "w+") as fout:
             fout.write(mega_image_cheat_sheet+"\n")
